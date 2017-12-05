@@ -293,6 +293,7 @@ int Fibonacci(int n);
 
 extern int textFileRead();
 extern int excelFileRead();
+extern int quicksort(int arry[], int size, int low, int high);
 int _tmain(int argc, _TCHAR* argv[])
 {
 #if 0
@@ -321,7 +322,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	sam.disp();
 	sam.f1();
 
-	//textFileRead();
+	textFileRead();
 	excelFileRead();
 
 #if 0
@@ -427,6 +428,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	Fibonacci(5);
 #endif
+
+	int a[] = { 57, 68, 59, 52, 72, 28, 96, 33, 24 };
+	quicksort(a, sizeof(a) / sizeof(a[0]), 0, sizeof(a) / sizeof(a[0]) - 1);
+	for (int i = 0; i < sizeof(a) / sizeof(a[0]); i++)
+	{
+		cout << a[i] << " ";
+	}
 	system("pause");
 
 	return 0;

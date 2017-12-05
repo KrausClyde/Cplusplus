@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include <fstream>
+#include <regex>
 #include <string>
 #include <vector>
 using namespace std;
@@ -14,24 +15,32 @@ typedef struct person
 	char number[5];
 	char score[3];
 }PERSON;
+
 int textFileRead()
 {
 	ifstream infile;
 	vector<string> v;
+	regex reg1("^1[345789][0-9]{9}$");
+	regex reg2("1[345789]\\d{9}"); //\d匹配数字加转义字符'\'
+	smatch r1;
+
 	infile.open("D:\\git\\code\\script\\text.txt");
 	if (!infile) cout << "error" << endl;
 
 	string str;
 	while(getline(infile,str))   //按行读取,遇到换行符结束
 	{
-	    cout<<str<<endl;
+		if (regex_match(str, r1, reg1))
+			cout << "str : "<< str << "   " << "RegularExp match : " << r1.str() <<endl;
+		if (regex_search(str, r1, reg2))
+			cout << "str : " << str << "   " << "RegularExp search : " << r1.str() << endl;
 		v.push_back(str);
 	}
 	sort(v.begin(), v.end());
 	v.erase(unique(v.begin(), v.end()), v.end());
 	for (vector<string>::iterator iter = v.begin(); iter != v.end(); iter++)
 	{
-		cout << *iter << endl;
+		//cout << *iter << endl;
 	}
 	infile.close();
 	return 0;
